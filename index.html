@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mind-Blowing Interactive Website</title>
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            overflow-x: hidden;
+            transition: background 1s;
+        }
+
+        header.hero {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0)), url('https://source.unsplash.com/random/1600x900') no-repeat center/cover;
+        }
+
+        .title {
+            font-size: 3em;
+            animation: fadeIn 2s;
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            margin-top: 10px;
+        }
+
+        .cta-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: white;
+            background: #ff5722;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 4px 15px rgba(255, 87, 34, 0.7);
+        }
+
+        /* 3D Model Section */
+        .model-container {
+            width: 100%;
+            height: 500px;
+            background-color: #000;
+            text-align: center;
+            padding: 50px 0;
+            position: relative;
+        }
+
+        .model-container h2 {
+            position: absolute;
+            top: 10px;
+            width: 100%;
+            font-size: 2.5em;
+            color: white;
+        }
+
+        #modelCanvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Parallax Scrolling Section */
+        .parallax-section {
+            background-image: url('https://source.unsplash.com/random/1600x900');
+            height: 500px;
+            background-attachment: fixed;
+            background-size: cover;
+            text-align: center;
+            color: white;
+            padding: 100px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .parallax-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2em;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+        }
+
+        /* Rainbow Mode */
+        .rainbow {
+            animation: rainbow 3s infinite;
+            background-size: 300% 300%;
+        }
+
+        @keyframes rainbow {
+            0% { background-color: red; color: white; }
+            16% { background-color: orange; color: black; }
+            32% { background-color: yellow; color: black; }
+            48% { background-color: green; color: white; }
+            64% { background-color: blue; color: white; }
+            80% { background-color: indigo; color: white; }
+            100% { background-color: violet; color: white; }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: red;
+            animation: fall 3s linear infinite;
+        }
+
+        @keyframes fall {
+            from {
+                transform: translateY(-100vh);
+            }
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <h1 class="title">Welcome to the Interactive Experience</h1>
+        <p class="subtitle">Prepare to be amazed by animations and interactions</p>
+        <button class="cta-button">Discover More</button>
+    </header>
+
+    <main>
+        <!-- 3D Model Section -->
+        <section class="model-container">
+            <h2>Interactive 3D Model</h2>
+            <canvas id="modelCanvas"></canvas>
+        </section>
+
+        <!-- Parallax Scrolling Section -->
+        <section class="parallax-section">
+            <div class="parallax-content">
+                <h2>Experience Parallax Scrolling</h2>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Created with love and creativity. Stay curious!</p>
+    </footer>
+
+    <canvas class="confetti"></canvas>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Interactive 3D Model
+        const canvas = document.getElementById('modelCanvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Add multiple 3D objects
+        const geometry1 = new THREE.BoxGeometry();
+        const material1 = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        const cube = new THREE.Mesh(geometry1, material1);
+        scene.add(cube);
+
+        const geometry2 = new THREE.SphereGeometry(1, 32, 32);
+        const material2 = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+        const sphere = new THREE.Mesh(geometry2, material2);
+        sphere.position.x = -3;
+        scene.add(sphere);
+
+        const geometry3 = new THREE.ConeGeometry(1, 2, 32);
+        const material3 = new THREE.MeshBasicMaterial({ color: 0x0000ff });
+        const cone = new THREE.Mesh(geometry3, material3);
+        cone.position.x = 3;
+        scene.add(cone);
+
+        camera.position.z = 5;
+
+        // Enable mouse controls for rotation (no zoom functionality)
+        let mouseX = 0;
+        let mouseY = 0;
+        let isMouseDown = false;
+
+        canvas.addEventListener('mousedown', (e) => {
+            isMouseDown = true;
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            isMouseDown = false;
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (isMouseDown) {
+                const deltaX = e.clientX - mouseX;
+                const deltaY = e.clientY - mouseY;
+                scene.rotation.x += deltaY * 0.01;
+                scene.rotation.y += deltaX * 0.01;
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            }
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+    </script>
+</body>
+</html>
