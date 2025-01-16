@@ -3,112 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mind-Blowing Interactive Website</title>
+    <title>Délicieusement - Restaurant</title>
+    <link rel="icon" href="Fav/favicon.ico" type="image/x-icon">
     <style>
         /* General Styles */
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: white;
-            overflow-x: hidden;
-            transition: background 1s;
+            background: linear-gradient(135deg, #ffebd2, #ffd1a7);
+            color: #333;
+            line-height: 1.6;
         }
 
-        header.hero {
+        header {
             text-align: center;
-            padding: 50px 20px;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0)), url('https://source.unsplash.com/random/1600x900') no-repeat center/cover;
+            padding: 120px 20px;
+            background: url('Rs Back.jpg') no-repeat center/cover;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
         }
 
-        .title {
-            font-size: 3em;
-            animation: fadeIn 2s;
+        header h1 {
+            font-size: 4.5em;
+            animation: fadeIn 2s ease-in-out;
         }
 
-        .subtitle {
-            font-size: 1.5em;
-            margin-top: 10px;
-        }
-
-        .cta-button {
+        header p {
+            font-size: 1.8em;
             margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 1.2em;
-            color: white;
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
             background: #ff5722;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        .cta-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0px 4px 15px rgba(255, 87, 34, 0.7);
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2em;
+            transition: color 0.3s;
         }
 
-        /* 3D Model Section */
-        .model-container {
-            width: 100%;
-            height: 500px;
-            background-color: #000;
+        nav a:hover {
+            color: #ffe0b3;
+        }
+
+        .menu {
+            display: flex;
+            overflow-x: auto; /* Enable horizontal scrolling */
+            gap: 20px;
+            padding: 50px 20px;
+            background: white;
+            color: #333;
+            scroll-snap-type: x mandatory;
+        }
+
+        .menu-item {
+            flex: 0 0 auto;
+            width: 300px;
+            background: #fff5ec;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
-            padding: 50px 0;
-            position: relative;
+            padding: 20px;
+            transition: transform 0.3s;
+            scroll-snap-align: center;
         }
 
-        .model-container h2 {
-            position: absolute;
-            top: 10px;
-            width: 100%;
+        .menu-item:hover {
+            transform: scale(1.05);
+        }
+
+        .menu-item img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .menu-item h3 {
+            margin: 15px 0 10px;
+            font-size: 1.5em;
+        }
+
+        .menu-item p {
+            font-size: 1em;
+            color: #555;
+        }
+
+        .menu-item span {
+            font-size: 1.3em;
+            color: #ff5722;
+            font-weight: bold;
+        }
+
+        .about {
+            padding: 70px 20px;
+            text-align: center;
+            background: #ffefd5;
+        }
+
+        .about h2 {
+            margin-bottom: 20px;
             font-size: 2.5em;
+        }
+
+        .about p {
+            font-size: 1.3em;
+            color: #555;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .location {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 20px;
+            background: #fff5ec;
+        }
+
+        .location-text {
+            margin-right: 20px;
+        }
+
+        .location h2 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+        }
+
+        .location p {
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        footer {
+            background: #333;
             color: white;
-        }
-
-        #modelCanvas {
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Parallax Scrolling Section */
-        .parallax-section {
-            background-image: url('https://source.unsplash.com/random/1600x900');
-            height: 500px;
-            background-attachment: fixed;
-            background-size: cover;
             text-align: center;
-            color: white;
-            padding: 100px 0;
-            position: relative;
-            z-index: 1;
+            padding: 20px;
+            margin-top: 50px;
         }
 
-        .parallax-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 2em;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+        footer a {
+            color: #ff5722;
+            text-decoration: none;
         }
 
-        /* Rainbow Mode */
-        .rainbow {
-            animation: rainbow 3s infinite;
-            background-size: 300% 300%;
+        footer a:hover {
+            text-decoration: underline;
         }
 
-        @keyframes rainbow {
-            0% { background-color: red; color: white; }
-            16% { background-color: orange; color: black; }
-            32% { background-color: yellow; color: black; }
-            48% { background-color: green; color: white; }
-            64% { background-color: blue; color: white; }
-            80% { background-color: indigo; color: white; }
-            100% { background-color: violet; color: white; }
-        }
-
+        /* Animations */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -118,129 +170,95 @@
             }
         }
 
-        /* Confetti */
-        .confetti {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 10;
+        .fade-in {
+            animation: fadeIn 2s;
         }
-
-        .confetti-piece {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: red;
-            animation: fall 3s linear infinite;
-        }
-
-        @keyframes fall {
-            from {
-                transform: translateY(-100vh);
-            }
-            to {
-                transform: translateY(100vh);
-            }
-        }
-
     </style>
 </head>
 <body>
-    <header class="hero">
-        <h1 class="title">Welcome to the Interactive Experience</h1>
-        <p class="subtitle">Prepare to be amazed by animations and interactions</p>
-        <button class="cta-button">Discover More</button>
+    <header>
+        <h1 class="fade-in">Welcome to Délicieusement</h1>
+        <p class="fade-in">Where every meal is a masterpiece</p>
     </header>
 
-    <main>
-        <!-- 3D Model Section -->
-        <section class="model-container">
-            <h2>Interactive 3D Model</h2>
-            <canvas id="modelCanvas"></canvas>
-        </section>
+    <nav>
+        <a href="#menu">Menu</a>
+        <a href="#location">Location</a>
+    </nav>
 
-        <!-- Parallax Scrolling Section -->
-        <section class="parallax-section">
-            <div class="parallax-content">
-                <h2>Experience Parallax Scrolling</h2>
-            </div>
-        </section>
-    </main>
+    <section id="menu" class="menu">
+        <div class="menu-item">
+            <img src="Food/Mg Pizza.jpg" alt="Pizza">
+            <h3>Margherita Pizza</h3>
+            <p>A classic Italian delight with fresh mozzarella and basil.</p>
+            <span>$12.99</span>
+        </div>
+        <div class="menu-item">
+            <img src="Food/CheeseBurger.jpg" alt="Burger">
+            <h3>Cheeseburger</h3>
+            <p>Two juicy beef patties with cheddar and fresh toppings.</p>
+            <span>$13.99</span>
+        </div>
+        <div class="menu-item">
+            <img src="Food/taco-4709325_1920.jpg" alt="Tacos">
+            <h3>Chicken Tacos</h3>
+            <p>Soft tacos filled with grilled chicken, salsa, and cheese.</p>
+            <span>$10.99</span>
+        </div>
+        <div class="menu-item">
+            <img src="Food/seafood-platter.jpg" alt="Seafood">
+            <h3>Seafood Platter</h3>
+            <p>An assortment of shrimp, fish, and calamari.</p>
+            <span>$19.99</span>
+        </div>
+        <div class="menu-item">
+            <img src="Food/spaghetti.jpg" alt="Pasta">
+            <h3>Alfredo Pasta</h3>
+            <p>Creamy Alfredo sauce with fettuccine and grilled chicken.</p>
+            <span>$14.99</span>
+        </div>
+        <div class="menu-item">
+            <img src="Food/salad.jpg" alt="Salad">
+            <h3>Greek Salad</h3>
+            <p>Fresh vegetables with feta cheese and olives.</p>
+            <span>$9.99</span>
+        </div>
+        <div class="menu-item">
+            <img src="Food/cake-2856551_1920.jpg" alt="Dessert">
+            <h3>Chocolate Lava Cake</h3>
+            <p>Warm chocolate cake with a gooey center.</p>
+            <span>$7.99</span>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <h2>About Us</h2>
+        <p>At Délicieusement, we believe in crafting exquisite dishes that tantalize your senses. Born from a passion for sharing delicious food, we offer a menu inspired by classic French techniques and vibrant Mediterranean flavors, always incorporating the freshest seasonal ingredients.
+
+            Whether you're celebrating a special occasion or simply enjoying a delightful meal, we invite you to experience the art of dining at Délicieusement.
+            
+            This version is more concise while still conveying the essence of your restaurant: a focus on quality, culinary inspiration, and a memorable dining experience.</p>
+    </section>
+
+    <section id="location" class="location">
+        <div class="location-text">
+            <h2>Our Location</h2>
+            <p>1301 16 Ave NW, Calgary, AB T2M 0L4</p>
+            <p>Call us: (403) 123-4567</p>
+            <p>Email: contact@délicieusement.com</p>
+        </div>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2466.429273178672!2d-114.09461442354698!3d51.06740477426014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x53716fbee8df933b%3A0x39f36847f19d3898!2s1301%2016%20Ave%20NW%2C%20Calgary%2C%20AB%20T2M%200L4%2C%20Canada!5e0!3m2!1sen!2sca!4v1616120000000!5m2!1sen!2sca"
+            width="600"
+            height="450"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+        ></iframe>
+    </section>
 
     <footer>
-        <p>Created with love and creativity. Stay curious!</p>
+        &copy; 2025 Aleksandar S. All rights reserved. Visit us on <a href="#">Instagram</a> and <a href="#">Facebook</a>.
     </footer>
-
-    <canvas class="confetti"></canvas>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script>
-        // Interactive 3D Model
-        const canvas = document.getElementById('modelCanvas');
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ canvas: canvas });
-
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
-
-        // Add multiple 3D objects
-        const geometry1 = new THREE.BoxGeometry();
-        const material1 = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-        const cube = new THREE.Mesh(geometry1, material1);
-        scene.add(cube);
-
-        const geometry2 = new THREE.SphereGeometry(1, 32, 32);
-        const material2 = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-        const sphere = new THREE.Mesh(geometry2, material2);
-        sphere.position.x = -3;
-        scene.add(sphere);
-
-        const geometry3 = new THREE.ConeGeometry(1, 2, 32);
-        const material3 = new THREE.MeshBasicMaterial({ color: 0x0000ff });
-        const cone = new THREE.Mesh(geometry3, material3);
-        cone.position.x = 3;
-        scene.add(cone);
-
-        camera.position.z = 5;
-
-        // Enable mouse controls for rotation (no zoom functionality)
-        let mouseX = 0;
-        let mouseY = 0;
-        let isMouseDown = false;
-
-        canvas.addEventListener('mousedown', (e) => {
-            isMouseDown = true;
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
-        canvas.addEventListener('mouseup', () => {
-            isMouseDown = false;
-        });
-
-        canvas.addEventListener('mousemove', (e) => {
-            if (isMouseDown) {
-                const deltaX = e.clientX - mouseX;
-                const deltaY = e.clientY - mouseY;
-                scene.rotation.x += deltaY * 0.01;
-                scene.rotation.y += deltaX * 0.01;
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-            }
-        });
-
-        function animate() {
-            requestAnimationFrame(animate);
-
-            renderer.render(scene, camera);
-        }
-
-        animate();
-
-    </script>
 </body>
 </html>
